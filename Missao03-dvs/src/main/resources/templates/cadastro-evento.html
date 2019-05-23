@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro</title>
+</head>
+<body>
+	<h2>CADASTRO</h2>
+	<a th:href="@{/menu}">Voltar ao Menu</a>&nbsp;&nbsp;
+	<a th:href="@{/menu/eventos}">Voltar ao Eventos</a>
+	<hr>
+	<!-- cadastro na lista de convidados -->
+	<form th:action="@{/menu/eventos/addEvento}" th:object="${evento}" method="post">
+		<input type="hidden" th:field="*{codigo}">
+		<label for="nome">Nome do Evento</label><br>
+		<input type="text" th:field="*{nomeEvento}"><br>
+		<label for="descricao">Descrição do Evento</label><br>
+		<textarea rows="10" cols="16" th:field="*{descricaoEvento}"></textarea><br>
+		<label for="data de realizacao">Data de Realização</label><br>
+		<input type="date" th:field="*{dataRealizacao}"><br>
+		<label for="quantidade de convidados">Quantidade de convidados</label><br>
+		<input type="number" th:field="*{qtdMaximaConvidados}"><br>
+		<label for="nome do responsavel">Nome do Responsável</label><br>
+		<input type="text" th:field="*{nomeResponsavel}"><br>
+		<label for="telefone do responsavel">Telefone do Responsável</label><br>
+		<input type="text" th:field="*{telefoneResponsavel}"><br>
+		<label for="duracao em horas">Duração em Horas</label><br>
+		<input type="time" th:field="*{duracaoEmHoras}"><br><br>
+		<input type="submit" value="Salvar">
+	</form>
+</body>
+</html>
