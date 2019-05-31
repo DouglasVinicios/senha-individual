@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html	xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <head>
 <meta charset="UTF-8">
-<title>Cadastro de Evento</title>
+<title>Cadastro</title>
 </head>
 <body>
-<div class="container">
-	<br>
 	<h2>CADASTRO</h2>
 	<a th:href="@{/menu}">Voltar ao Menu</a>&nbsp;&nbsp;
 	<a th:href="@{/menu/eventos}">Voltar ao Eventos</a>
@@ -16,46 +13,21 @@
 	<!-- cadastro na lista de convidados -->
 	<form th:action="@{/menu/eventos/addEvento}" th:object="${evento}" method="post">
 		<input type="hidden" th:field="*{codigo}">
-		<div class="form-group">
-			<label for="nome">Nome do Evento</label><br>
-			<input type="text" th:field="*{nomeEvento}"><br>
-		</div>
-		<div class="form-group">
+		<label for="nome">Nome do Evento</label><br>
+		<input type="text" th:field="*{nomeEvento}"><br>
 		<label for="descricao">Descrição do Evento</label><br>
 		<textarea rows="10" cols="16" th:field="*{descricaoEvento}"></textarea><br>
-		</div>
-		<div class="form-group">
 		<label for="data de realizacao">Data de Realização</label><br>
 		<input type="date" th:field="*{dataRealizacao}"><br>
-		</div>
-		<div class="form-group">
 		<label for="quantidade de convidados">Quantidade de convidados</label><br>
 		<input type="number" th:field="*{qtdMaximaConvidados}"><br>
-		</div>
-		<div class="form-group">
 		<label for="nome do responsavel">Nome do Responsável</label><br>
 		<input type="text" th:field="*{nomeResponsavel}"><br>
-		</div>
-		<div class="form-group">
 		<label for="telefone do responsavel">Telefone do Responsável</label><br>
 		<input type="text" th:field="*{telefoneResponsavel}"><br>
-		</div>
-		<div class="form-group">
 		<label for="duracao em horas">Duração em Horas</label><br>
 		<input type="time" th:field="*{duracaoEmHoras}"><br><br>
-		</div>
-		<div class="form-group">
-		<label for="escolha um local">Escolha um Local</label>
-		<br><br>
-		<select th:field="*{localEvento}">
-			<option th:each="localEvento : ${locaisEventos}" th:value="${localEvento.codigo}" th:text="${localEvento.endereco.nome}"></option>
-		</select>
-		<br><br>
-		</div>
-		<div class="form-group">
-		<input class="btn btn-info" type="submit" value="Salvar">
-		</div>
+		<input type="submit" value="Salvar">
 	</form>
-</div>
 </body>
 </html>

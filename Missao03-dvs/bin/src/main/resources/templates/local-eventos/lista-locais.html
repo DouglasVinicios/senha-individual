@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listagem dos locais de eventos</title>
+</head>
+<body>
+	<a th:href="@{/menu}">Voltar ao menu</a>&nbsp;&nbsp;
+	<a th:href="@{/menu/local-eventos/cadastrar}">Cadastrar novo local</a>
+	<hr>
+	<table>
+		<tr>
+			<th>Nome do local</th>
+			<th>Capacidade</th>
+			<th>Link para o mapa</th>
+			<td>...</td>
+		</tr>
+		<tr th:each="localEvento : ${locaisEventos}">
+			<td th:text="${localEvento.endereco.nome}"></td>
+			<td th:text="${localEvento.capacidade}"></td>
+			<td><a th:href="${localEvento.linkGoogleMaps}" th:text="${localEvento.linkGoogleMaps}" target="_blank"></a></td>
+			<td>
+				<a th:href="@{/menu/local-eventos/editar(id=${localEvento.codigo})}">Editar</a>
+				<a th:href="@{/menu/local-eventos/remover(id=${localEvento.codigo})}">Remover</a>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

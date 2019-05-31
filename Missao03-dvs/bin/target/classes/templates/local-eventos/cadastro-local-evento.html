@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro do Local</title>
+</head>
+<body>
+	<a th:href="@{/menu}">Voltar ao menu</a>&nbsp;&nbsp;
+	<a th:href="@{/menu/local-eventos}">Voltar a Lista</a>
+	<form th:action="@{/menu/local-eventos/addLocal}" th:object="${localEvento}" method="post">
+		<br>
+		<input type="hidden" th:field="*{codigo}">
+		<label for="nome">Nome do Local: </label>
+		<input type="text" th:field="*{endereco.nome}">
+		<br><br>
+		<!-- Endereços -->
+		<label for="avenida">Avenida: </label>
+		<input type="text" th:field="*{endereco.avenida}">
+		<br><br>
+		<label for="bairro">Bairro: </label>
+		<input type="text" th:field="*{endereco.bairro}">
+		<br><br>
+		<label for="cidade">Cidade: </label>
+		<input type="text" th:field="*{endereco.cidade}">
+		<br><br>
+		<label for="estado">Estado: </label>
+		<input type="text" th:field="*{endereco.estado}">
+		<br><br>
+		<!-- fim Endereços -->
+		<label for="link do google maps">Link do Google Maps</label>
+		<input type="url" th:field="*{linkGoogleMaps}">
+		<br><br>
+		<label>Capacidade: </label>
+		<input type="number" th:field="*{capacidade}">
+		<br><br>
+		<label for="tipo de ambiente">Tipo de Ambiente</label>
+		<br>
+		<label for="aberto">Aberto</label>
+		<input type="radio" th:field="*{aberto}" th:value="true">
+		<label for="fechado">Fechado</label>
+		<input type="radio" th:field="*{aberto}" th:value="false">
+		<br><br>
+		<input type="submit" value="Salvar">
+	</form>
+</body>
+</html>

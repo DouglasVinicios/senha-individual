@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html	xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <head>
 <meta charset="UTF-8">
 <title>Senha Individual</title>
@@ -11,14 +12,16 @@
 <body>
 	<div class="menu">
 		<h2>MENU:</h2>
-		<div class="links">
-			<a th:href="@{/cadastro}">Cadastro</a>
-			<a th:href="@{/altera}">Altera</a>
-			<a th:href="@{/horarios}">Horarios</a>
-			<a th:href="@{/eventos}">Eventos</a>
-			<a th:href="@{/sobre}">Sobre</a>
-			<a th:href="@{/menu/eventos}">Cadastro de Eventos</a>
-			<a th:href="@{/menu/local-eventos}">Cadastro de Locais de Eventos</a>
+		<div class="container">
+			<div class="list-group">
+				<a class="list-group-item list-group-item-action" th:href="@{/cadastro}">Cadastro</a>
+				<a class="list-group-item list-group-item-action" th:href="@{/altera}">Altera</a>
+				<a class="list-group-item list-group-item-action" th:href="@{/horarios}">Horarios</a>
+				<a class="list-group-item list-group-item-action" th:href="@{/eventos}">Eventos</a>
+				<a class="list-group-item list-group-item-action" th:href="@{/sobre}">Sobre</a>
+				<a class="list-group-item list-group-item-action" th:href="@{/menu/eventos}">Cadastro de Eventos</a>
+				<a class="list-group-item list-group-item-action" th:href="@{/menu/local-eventos}">Cadastro de Locais de Eventos</a>
+			</div>
 		</div>
 	</div>
 </body>
