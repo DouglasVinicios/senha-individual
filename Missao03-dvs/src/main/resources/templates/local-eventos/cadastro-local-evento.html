@@ -2,46 +2,80 @@
 <html	xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>Cadastro do Local</title>
 </head>
 <body>
-	<a th:href="@{/menu}">Voltar ao menu</a>&nbsp;&nbsp;
-	<a th:href="@{/menu/local-eventos}">Voltar a Lista</a>
+<div class="container">
+	<br>
+	<h2>CADASTRO DE LOCAL</h2>
+	<a class="btn btn-outline-secondary" th:href="@{/menu}">Voltar ao menu</a>&nbsp;&nbsp;
+	<a class="btn btn-outline-info" th:href="@{/menu/local-eventos}">Voltar a Lista</a>
+	<hr>
 	<form th:action="@{/menu/local-eventos/addLocal}" th:object="${localEvento}" method="post">
-		<br>
 		<input type="hidden" th:field="*{codigo}">
-		<label for="nome">Nome do Local: </label>
-		<input type="text" th:field="*{endereco.nome}">
-		<br><br>
+		<div class="form-group row">
+			<label for="nome" class="col-sm-2 col-form-label">Nome do Local: </label>
+			<div class="col-sm-6">
+				<input class="form-control" type="text" th:field="*{endereco.nome}">
+			</div>
+		</div>
 		<!-- Endereços -->
-		<label for="avenida">Avenida: </label>
-		<input type="text" th:field="*{endereco.avenida}">
-		<br><br>
-		<label for="bairro">Bairro: </label>
-		<input type="text" th:field="*{endereco.bairro}">
-		<br><br>
-		<label for="cidade">Cidade: </label>
-		<input type="text" th:field="*{endereco.cidade}">
-		<br><br>
-		<label for="estado">Estado: </label>
-		<input type="text" th:field="*{endereco.estado}">
-		<br><br>
+		<div class="form-group row">
+			<label for="avenida" class="col-sm-2 col-form-label">Avenida: </label>
+			<div class="col-sm-6">
+				<input class="form-control" type="text" th:field="*{endereco.avenida}">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="bairro" class="col-sm-2 col-form-label">Bairro: </label>
+			<div class="col-sm-6">
+				<input class="form-control" type="text" th:field="*{endereco.bairro}">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="cidade" class="col-sm-2 col-form-label">Cidade: </label>
+			<div class="col-sm-6">
+				<input class="form-control" type="text" th:field="*{endereco.cidade}">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="estado" class="col-sm-2 col-form-label">Estado: </label>
+			<div class="col-sm-6">
+				<input class="form-control" type="text" th:field="*{endereco.estado}">
+			</div>
+		</div>
 		<!-- fim Endereços -->
-		<label for="link do google maps">Link do Google Maps</label>
-		<input type="url" th:field="*{linkGoogleMaps}">
-		<br><br>
-		<label>Capacidade: </label>
-		<input type="number" th:field="*{capacidade}">
-		<br><br>
-		<label for="tipo de ambiente">Tipo de Ambiente</label>
-		<br>
-		<label for="aberto">Aberto</label>
-		<input type="radio" th:field="*{aberto}" th:value="true">
-		<label for="fechado">Fechado</label>
-		<input type="radio" th:field="*{aberto}" th:value="false">
-		<br><br>
-		<input type="submit" value="Salvar">
+		<div class="form-group row">
+			<label for="link do google maps" class="col-sm-2 col-form-label">Link do Google Maps</label>
+			<div class="col-sm-6">
+				<input class="form-control" type="url" th:field="*{linkGoogleMaps}">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="capacidade" class="col-sm-2 col-form-label">Capacidade: </label>
+			<div class="col-sm-6">
+				<input class="form-control" type="number" th:field="*{capacidade}">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="tipo de ambiente" class="col-sm-2 col-form-label">Tipo de Ambiente</label>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" th:field="*{aberto}" th:value="true">
+				<label for="aberto" class="col-sm-1 col-form-label">Aberto</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" th:field="*{aberto}" th:value="false">
+				<label for="fechado" class="col-sm-1 col-form-label">Fechado</label>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-6">
+				<input class="btn btn-primary" type="submit" value="Salvar">
+			</div>
+		</div>
 	</form>
+</div>
 </body>
 </html>
