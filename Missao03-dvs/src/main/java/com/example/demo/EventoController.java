@@ -1,7 +1,10 @@
 package com.example.demo;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +23,8 @@ public class EventoController {
 	@GetMapping("")
 	public ModelAndView exibirEventos() {
 		ModelAndView mv = new ModelAndView("/eventos/lista-eventos");
-		mv.addObject("eventos", eventoRep.findAll());
+		mv.addObject("evento", new Evento());
+		mv.addObject("listaEventos", eventoRep.findAll());
 		return mv;
 	}
 	
@@ -33,9 +37,13 @@ public class EventoController {
 	}
 	
 	@PostMapping("/addEvento")
-	public ModelAndView addEvento(@ModelAttribute Evento evento) {
-		ModelAndView mv = new ModelAndView("redirect:/menu/eventos");
+	public ModelAndView addEvento(@Valid Evento evento, BindingResult br) {
+		ModelAndView mv = new ModelAndView("eventos/cadastro-evento");
+		if(br.hasErrors()) {
+			return mv;
+		}
 		eventoRep.save(evento);
+		mv.setViewName("redirect:/menu/eventos");
 		return mv;
 	}
 	
@@ -51,5 +59,13 @@ public class EventoController {
 	public ModelAndView removerEvento(@RequestParam Integer id) {
 		eventoRep.deleteById(id);
 		return new ModelAndView("redirect:/menu/eventos");
+	}
+	
+	@PostMapping("/pesquisar")
+	public ModelAndView pesquisarEvento(@ModelAttribute Evento evento) {
+		ModelAndView mv = new ModelAndView("/eventos/lista-eventos");
+		mv.addObject("evento", new Evento());
+		mv.addObject("listaEventos", eventoRep.findByNomeEventoContainingIgnoreCase(evento.getNomeEvento()));
+		return mv;
 	}
 }

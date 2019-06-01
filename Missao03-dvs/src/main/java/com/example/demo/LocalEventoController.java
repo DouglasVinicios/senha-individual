@@ -1,9 +1,11 @@
 package com.example.demo;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,9 +32,13 @@ public class LocalEventoController {
 	}
 	
 	@PostMapping("/addLocal")
-	public ModelAndView addEvento(@ModelAttribute LocalEvento localEvento) {
-		ModelAndView mv = new ModelAndView("redirect:/menu/local-eventos");
+	public ModelAndView addEvento(@Valid LocalEvento localEvento, BindingResult br) {
+		ModelAndView mv = new ModelAndView("local-eventos/cadastro-local-evento");
+		if(br.hasErrors()) {
+			return mv;
+		}
 		localEventoRep.save(localEvento);
+		mv.setViewName("redirect:/menu/local-eventos");
 		return mv;
 	}
 	

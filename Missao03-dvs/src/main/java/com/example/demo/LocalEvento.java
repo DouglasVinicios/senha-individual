@@ -6,14 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class LocalEvento {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	@Embedded
+	@NotNull
 	private Endereco endereco;
+	@NotBlank(message = "Link do Maps é necessário")
 	private String linkGoogleMaps;
+	@Min(value = 1, message = "Capacidade deve ser maior que 0")
 	private int capacidade;
 	@Column(nullable = false, columnDefinition = "BIT(1) default 1")
 	private boolean aberto;

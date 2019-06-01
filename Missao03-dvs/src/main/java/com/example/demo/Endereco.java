@@ -1,13 +1,19 @@
 package com.example.demo;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotBlank;
 
 @Embeddable
 public class Endereco {
+	@NotBlank(message = "Nome do endereço é necessário")
 	private String nome;
+	@NotBlank(message = "Avenida é necessário")
 	private String avenida;
+	@NotBlank(message = "Bairro é necessário")
 	private String bairro;
+	@NotBlank(message = "Cidade é necessário")
 	private String cidade;
+	@NotBlank(message = "Estado é necessário")
 	private String estado;
 	
 	public String getNome() {

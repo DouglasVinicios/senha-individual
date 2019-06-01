@@ -1,12 +1,16 @@
 package com.example.demo;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,15 +18,23 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Evento {
 	@Id @GeneratedValue
 	private Integer codigo;
+	@NotBlank(message = "O nome deve ser preenchido com texto válido")
 	private String nomeEvento;
+	@NotBlank(message = "É necessário uma descrição do evento")
 	private String descricaoEvento;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Future(message = "Só é aceito datas futuras")
 	private LocalDate dataRealizacao;
+	@Min(value = 11, message = "Quantidade de convidados deve ser maior que 10")
 	private int qtdMaximaConvidados;
+	@NotBlank(message = "Nome é necessário")
 	private String nomeResponsavel;
+	@Pattern(regexp = "^[0-9]{9}", message = "Número de telefone inválido")
 	private String telefoneResponsavel;
-	private LocalTime duracaoEmHoras;
+	@Min(value = 1)
+	private int duracaoEmHoras;
 	@ManyToOne
+	@NotNull(message = "Local do Evento é necessário")
 	private LocalEvento localEvento;
 	
 	public Integer getCodigo() {
@@ -67,10 +79,10 @@ public class Evento {
 	public void setTelefoneResponsavel(String telefoneResponsavel) {
 		this.telefoneResponsavel = telefoneResponsavel;
 	}
-	public LocalTime getDuracaoEmHoras() {
+	public int getDuracaoEmHoras() {
 		return duracaoEmHoras;
 	}
-	public void setDuracaoEmHoras(LocalTime duracaoEmHoras) {
+	public void setDuracaoEmHoras(int duracaoEmHoras) {
 		this.duracaoEmHoras = duracaoEmHoras;
 	}
 	public LocalEvento getLocalEvento() {

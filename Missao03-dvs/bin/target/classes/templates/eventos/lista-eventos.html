@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html	xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <head>
 <meta charset="UTF-8">
 <title>Eventos</title>
 </head>
 <body>
+<div class="container">
+	<br>
 	<h2>EVENTOS</h2>
-	<a th:href="@{/menu}">Voltar ao Menu</a>&nbsp;&nbsp;
-	<a th:href="@{/menu/eventos/cadastrar}">Cadastrar novo evento</a>
+	<a class="btn btn-outline-dark" th:href="@{/menu}">Voltar ao Menu</a>&nbsp;&nbsp;
+	<a class="btn btn-outline-info" th:href="@{/menu/eventos/cadastrar}">Cadastrar Evento</a>
 	<!-- página aonde poderá criar varias listas
 		 de convidados e manter controle sobre elas -->
 	<hr>
-	<table>
-		<tr>
-			<th>Nome do Evento</th>
-			<th>Data<th>
-			<th>Nome do Responsável</th>
-			<th>Telefone do Responsável</th>
-			<th>Duração</th>
-			<th>Ações</th>
-		</tr>
-		<tr th:each="evento : ${eventos}">
-			<td th:text="${evento.nomeEvento}"></td>
+	<table class="table">
+	  <thead class="thead-light">
+	    <tr>
+	      <th scope="col">Nome do Evento</th>
+	      <th scope="col">Data</th>
+	      <th scope="col">Nome do Responsável</th>
+	      <th scope="col">Telefone do Responsável</th>
+	      <th scope="col">Duração</th>
+	      <th scope="col">Ações</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="evento : ${eventos}">
+	      	<td th:text="${evento.nomeEvento}"></td>
 			<td th:text="${evento.dataRealizacao}"></td>
 			<td th:text="${evento.nomeResponsavel}"></td>
 			<td th:text="${evento.telefoneResponsavel}"></td>
 			<td th:text="${evento.duracaoEmHoras}"></td>
 			<td>
-				<a th:href="@{/menu/eventos/editar(id=${evento.codigo})}">Editar</a>&nbsp;&nbsp;
-				<a th:href="@{/menu/eventos/remover(id=${evento.codigo})}">Remover</a>
+				<a class="btn btn-warning" th:href="@{/menu/eventos/editar(id=${evento.codigo})}">Editar</a>&nbsp;&nbsp;
+				<a class="btn btn-danger" th:href="@{/menu/eventos/remover(id=${evento.codigo})}">Remover</a>
 			</td>
-		</tr>
+	    </tr>
+	  </tbody>
 	</table>
 	<hr>
+</div>
 </body>
 </html>

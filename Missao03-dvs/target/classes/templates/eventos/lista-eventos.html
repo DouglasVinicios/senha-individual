@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html	xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <head>
 <meta charset="UTF-8">
 <title>Eventos</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+</style>
 </head>
 <body>
 <div class="container">
 	<br>
-	<h2>EVENTOS</h2>
-	<a class="btn btn-outline-dark" th:href="@{/menu}">Voltar ao Menu</a>&nbsp;&nbsp;
-	<a class="btn btn-outline-info" th:href="@{/menu/eventos/cadastrar}">Cadastrar Evento</a>
+	<div class="row">
 	<!-- página aonde poderá criar varias listas
-		 de convidados e manter controle sobre elas -->
+		de convidados e manter controle sobre elas -->
+		<div class="col-sm-12">
+			<h2>EVENTOS</h2>
+			
+			<a class="btn btn-outline-dark" th:href="@{/menu}">Voltar ao Menu</a>&nbsp;&nbsp;
+			<a class="btn btn-outline-info" th:href="@{/menu/eventos/cadastrar}">Cadastrar Evento</a>
+			
+			<form class="form-inline" th:action="@{/menu/eventos/pesquisar}" th:object="${evento}" method="post">
+				<div class="form-group">
+					<input class="form-control" type="search" th:field="*{nomeEvento}" placeholder="Pesquisar...">
+				</div>
+				<div class="form-group">
+					<input class="btn btn-primary" type="submit" value="pesquisar">
+				</div>
+			</form>
+			
+		</div>
+	</div>
 	<hr>
 	<table class="table">
 	  <thead class="thead-light">
@@ -27,7 +44,7 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr th:each="evento : ${eventos}">
+	    <tr th:each="evento : ${listaEventos}">
 	      	<td th:text="${evento.nomeEvento}"></td>
 			<td th:text="${evento.dataRealizacao}"></td>
 			<td th:text="${evento.nomeResponsavel}"></td>
