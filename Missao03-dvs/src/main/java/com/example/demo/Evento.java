@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,23 +18,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Evento {
 	@Id @GeneratedValue
 	private Integer codigo;
-	@NotBlank(message = "O nome deve ser preenchido com texto válido")
+	@NotBlank(message = "Obrigatório, não deve ter apenas espaços em branco")
 	private String nomeEvento;
 	@NotBlank(message = "É necessário uma descrição do evento")
 	private String descricaoEvento;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Future(message = "Só é aceito datas futuras")
+	@DateTimeFormat(pattern="yyyy-MM-dd") @FutureOrPresent(message = "Obrigatório, deve ser maior ou igual a data atual")
 	private LocalDate dataRealizacao;
-	@Min(value = 11, message = "Quantidade de convidados deve ser maior que 10")
+	@Min(value = 11, message = "Deve ser maior que 10")
 	private int qtdMaximaConvidados;
 	@NotBlank(message = "Nome é necessário")
 	private String nomeResponsavel;
 	@Pattern(regexp = "^[0-9]{9}", message = "Número de telefone inválido")
 	private String telefoneResponsavel;
-	@Min(value = 1)
+	@Min(value = 1, message = "Deve ser maior que 0")
 	private int duracaoEmHoras;
-	@ManyToOne
-	@NotNull(message = "Local do Evento é necessário")
+	@ManyToOne @NotNull(message = "Obrigatório")
 	private LocalEvento localEvento;
 	
 	public Integer getCodigo() {

@@ -2,7 +2,7 @@
 <html	xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>Cadastro do Local</title>
 </head>
@@ -14,21 +14,44 @@
 	<a class="btn btn-outline-info" th:href="@{/menu/local-eventos}">Voltar a Lista</a>
 	<hr>
 	<form th:action="@{/menu/local-eventos/addLocal}" th:object="${localEvento}" method="post">
-		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-			<p th:each="err : ${#fields.allErrors()}" th:text="${err}"></p>
-		</div>
+		<!-- lista todos os erros
+			<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+				<p th:each="err : ${#fields.allErrors()}" th:text="${err}"></p>
+			</div>
+			
+			seleciona o erro do atributo especifico e mostra o mesmo
+			<span th:if="${#fields.hasErrors('endereco.nome')}" th:errors="*{endereco.nome}"></span>
+		 -->
 		<input type="hidden" th:field="*{codigo}">
+		<!-- Endereços -->
+		<div class="row" th:if="${#fields.hasErrors('endereco.nome')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{endereco.nome}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="nome" class="col-sm-2 col-form-label">Nome do Local: </label>
 			<div class="col-sm-6">
 				<input class="form-control" type="text" th:field="*{endereco.nome}">
 			</div>
 		</div>
-		<!-- Endereços -->
+		<div class="row" th:if="${#fields.hasErrors('endereco.avenida')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{endereco.avenida}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="avenida" class="col-sm-2 col-form-label">Avenida: </label>
 			<div class="col-sm-6">
 				<input class="form-control" type="text" th:field="*{endereco.avenida}">
+			</div>
+		</div>
+		<div class="row" th:if="${#fields.hasErrors('endereco.bairro')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{endereco.bairro}" class="font-italic"></span>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -37,10 +60,22 @@
 				<input class="form-control" type="text" th:field="*{endereco.bairro}">
 			</div>
 		</div>
+		<div class="row" th:if="${#fields.hasErrors('endereco.cidade')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{endereco.cidade}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="cidade" class="col-sm-2 col-form-label">Cidade: </label>
 			<div class="col-sm-6">
 				<input class="form-control" type="text" th:field="*{endereco.cidade}">
+			</div>
+		</div>
+		<div class="row" th:if="${#fields.hasErrors('endereco.estado')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{endereco.estado}" class="font-italic"></span>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -50,16 +85,34 @@
 			</div>
 		</div>
 		<!-- fim Endereços -->
+		<div class="row" th:if="${#fields.hasErrors('linkGoogleMaps')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{linkGoogleMaps}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="link do google maps" class="col-sm-2 col-form-label">Link do Google Maps</label>
 			<div class="col-sm-6">
 				<input class="form-control" type="url" th:field="*{linkGoogleMaps}">
 			</div>
 		</div>
+		<div class="row" th:if="${#fields.hasErrors('capacidade')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{capacidade}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="capacidade" class="col-sm-2 col-form-label">Capacidade: </label>
 			<div class="col-sm-6">
 				<input class="form-control" type="number" th:field="*{capacidade}">
+			</div>
+		</div>
+		<div class="row" th:if="${#fields.hasErrors('aberto')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{aberto}" class="font-italic"></span>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -77,7 +130,6 @@
 			<div class="col-sm-6">
 				<input class="btn btn-primary" type="submit" value="Salvar">
 			</div>
-			
 		</div>
 	</form>
 </div>

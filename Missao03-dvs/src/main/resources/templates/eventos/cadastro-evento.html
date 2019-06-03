@@ -15,14 +15,31 @@
 	<hr>
 	<!-- cadastro na lista de convidados -->
 	<form th:action="@{/menu/eventos/addEvento}" th:object="${evento}" method="post">
-		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-			<p th:each="err : ${#fields.allErrors()}" th:text="${err}"></p>
-		</div>
+		<!-- mesma baguncinha de antes
+			<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+				<p th:each="err : ${#fields.allErrors()}" th:text="${err}"></p>
+			</div>
+			
+			*-* agora é pra evento a mesma baguncinha
+			<span th:if="${#fields.hasErrors('nomeEvento')}" th:errors="*{nomeEvento}"></span>
+		-->
 		<input type="hidden" th:field="*{codigo}">
+		<div class="row" th:if="${#fields.hasErrors('nomeEvento')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{nomeEvento}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="nome" class="col-sm-2 col-form-label">Nome do Evento</label>
 			<div class="col-sm-6">
 				<input class="form-control" type="text" th:field="*{nomeEvento}">
+			</div>
+		</div>
+		<div class="row" th:if="${#fields.hasErrors('descricaoEvento')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{descricaoEvento}" class="font-italic"></span>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -31,10 +48,22 @@
 				<textarea class="form-control" rows="3" th:field="*{descricaoEvento}"></textarea>
 			</div>
 		</div>
+		<div class="row" th:if="${#fields.hasErrors('dataRealizacao')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{dataRealizacao}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="data de realizacao" class="col-sm-2 col-form-label">Data de Realização</label>
 			<div class="col-sm-6">
 				<input class="form-control" type="date" th:field="*{dataRealizacao}">
+			</div>
+		</div>
+		<div class="row" th:if="${#fields.hasErrors('qtdMaximaConvidados')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{qtdMaximaConvidados}" class="font-italic"></span>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -43,10 +72,22 @@
 				<input class="form-control" type="number" th:field="*{qtdMaximaConvidados}">
 			</div>
 		</div>
+		<div class="row" th:if="${#fields.hasErrors('nomeResponsavel')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{nomeResponsavel}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="nome do responsavel" class="col-sm-2 col-form-label">Nome do Responsável</label>
 			<div class="col-sm-6">
 				<input class="form-control" type="text" th:field="*{nomeResponsavel}">
+			</div>
+		</div>
+		<div class="row" th:if="${#fields.hasErrors('telefoneResponsavel')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{telefoneResponsavel}" class="font-italic"></span>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -55,10 +96,22 @@
 				<input class="form-control" type="text" th:field="*{telefoneResponsavel}">
 			</div>
 		</div>
+		<div class="row" th:if="${#fields.hasErrors('duracaoEmHoras')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{duracaoEmHoras}" class="font-italic"></span>
+			</div>
+		</div>
 		<div class="form-group row">
 			<label for="duracao em horas" class="col-sm-2 col-form-label">Duração em Horas</label>
 			<div class="col-sm-6">
 				<input class="form-control" type="number" th:field="*{duracaoEmHoras}">
+			</div>
+		</div>
+		<div class="row" th:if="${#fields.hasErrors('localEvento')}">
+			<div class="col-sm-2 p-3"></div>
+			<div class="col-sm-auto text-left text-danger">
+				<span th:errors="*{localEvento}" class="font-italic"></span>
 			</div>
 		</div>
 		<div class="form-group row">

@@ -3,10 +3,10 @@ package com.example.demo;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +24,19 @@ public class EventoController {
 	public ModelAndView exibirEventos() {
 		ModelAndView mv = new ModelAndView("/eventos/lista-eventos");
 		mv.addObject("evento", new Evento());
-		mv.addObject("listaEventos", eventoRep.findAll());
+		mv.addObject("listaEventos", this.eventoRep.findAll(Sort.by("nomeEvento")));
+		return mv;
+	}
+	
+	@PostMapping("")
+	public ModelAndView pesquisarEvento(@RequestParam(required = false) String nomePesquisado) {
+		ModelAndView mv = new ModelAndView("/eventos/lista-eventos");
+		mv.addObject("evento", new Evento());
+		if(nomePesquisado == null || nomePesquisado.trim().isEmpty()) {
+			mv.addObject("listaEventos", this.eventoRep.findAll(Sort.by("nomeEvento")));
+		}else {
+			mv.addObject("listaEventos", this.eventoRep.findByNomeEventoContainingIgnoreCase(nomePesquisado));
+		}
 		return mv;
 	}
 	
@@ -32,40 +44,39 @@ public class EventoController {
 	public ModelAndView cadastrarNovoEvento() {
 		ModelAndView mv = new ModelAndView("/eventos/cadastro-evento");
 		mv.addObject("evento", new Evento());
-		mv.addObject("locaisEventos", localEventoRep.findAll());
+		mv.addObject("locaisEventos", this.localEventoRep.findAll(Sort.by("endereco.nome")));
 		return mv;
 	}
 	
 	@PostMapping("/addEvento")
 	public ModelAndView addEvento(@Valid Evento evento, BindingResult br) {
-		ModelAndView mv = new ModelAndView("eventos/cadastro-evento");
 		if(br.hasErrors()) {
+			ModelAndView mv = new ModelAndView("/eventos/cadastro-evento");
+			mv.addObject("locaisEventos", this.localEventoRep.findAll(Sort.by("endereco.nome")));
 			return mv;
 		}
 		eventoRep.save(evento);
-		mv.setViewName("redirect:/menu/eventos");
-		return mv;
+		return exibirEventos();
 	}
 	
 	@GetMapping("/editar")
-	public ModelAndView editarEvento(@RequestParam Integer id) {
+	public ModelAndView editarEvento(Evento evento) {
 		ModelAndView mv = new ModelAndView("/eventos/cadastro-evento");
-		mv.addObject("evento", eventoRep.getOne(id));
-		mv.addObject("locaisEventos", localEventoRep.findAll());
+		mv.addObject("locaisEventos", localEventoRep.findAll(Sort.by("endereco.nome")));
+		if(evento != null && evento.getCodigo() != null) {
+			mv.addObject("evento", this.eventoRep.getOne(evento.getCodigo()));
+		}else {
+			mv.addObject("evento", new Evento());
+		}
 		return mv;
 	}
 	
 	@GetMapping("/remover")
-	public ModelAndView removerEvento(@RequestParam Integer id) {
-		eventoRep.deleteById(id);
+	public ModelAndView removerEvento(Evento evento) {
+		if(evento != null && evento.getCodigo() != null) {
+			this.eventoRep.delete(evento);
+		}
 		return new ModelAndView("redirect:/menu/eventos");
 	}
 	
-	@PostMapping("/pesquisar")
-	public ModelAndView pesquisarEvento(@ModelAttribute Evento evento) {
-		ModelAndView mv = new ModelAndView("/eventos/lista-eventos");
-		mv.addObject("evento", new Evento());
-		mv.addObject("listaEventos", eventoRep.findByNomeEventoContainingIgnoreCase(evento.getNomeEvento()));
-		return mv;
-	}
 }

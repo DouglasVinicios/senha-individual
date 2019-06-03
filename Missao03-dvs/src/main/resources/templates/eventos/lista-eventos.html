@@ -11,53 +11,53 @@
 <body>
 <div class="container">
 	<br>
-	<div class="row">
 	<!-- página aonde poderá criar varias listas
 		de convidados e manter controle sobre elas -->
-		<div class="col-sm-12">
-			<h2>EVENTOS</h2>
-			
-			<a class="btn btn-outline-dark" th:href="@{/menu}">Voltar ao Menu</a>&nbsp;&nbsp;
-			<a class="btn btn-outline-info" th:href="@{/menu/eventos/cadastrar}">Cadastrar Evento</a>
-			
-			<form class="form-inline" th:action="@{/menu/eventos/pesquisar}" th:object="${evento}" method="post">
-				<div class="form-group">
-					<input class="form-control" type="search" th:field="*{nomeEvento}" placeholder="Pesquisar...">
-				</div>
-				<div class="form-group">
-					<input class="btn btn-primary" type="submit" value="pesquisar">
-				</div>
+	<h2>EVENTOS</h2>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+			    <li class="nav-item">
+					<a class="nav-link" th:href="@{/menu}">Voltar ao Menu</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/menu/eventos/cadastrar}">Novo Evento</a>
+				</li>
+    		</ul>
+			<form class="form-inline my-2 my-lg-0" th:action="@{/menu/eventos}" method="post">
+				<input class="form-control mr-sm-2" type="search" name="nomePesquisado" placeholder="Pesquisar" aria-label="Pesquisar">
+				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Pesquisar</button>
 			</form>
-			
 		</div>
+	</nav>
+	<hr>
+	<div class="card">
+		<table class="table">
+		  <thead class="thead-light">
+		    <tr>
+		      <th scope="col">Nome do Evento</th>
+		      <th scope="col">Data</th>
+		      <th scope="col">Nome do Responsável</th>
+		      <th scope="col">Telefone do Responsável</th>
+		      <th scope="col">Duração</th>
+		      <th scope="col">Ações</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="evento : ${listaEventos}">
+		      	<td th:text="${evento.nomeEvento}"></td>
+				<td th:text="${evento.dataRealizacao}"></td>
+				<td th:text="${evento.nomeResponsavel}"></td>
+				<td th:text="${evento.telefoneResponsavel}"></td>
+				<td th:text="${evento.duracaoEmHoras}"></td>
+				<td>
+					<a class="btn btn-warning" th:href="|/menu/eventos/editar?codigo=${evento.codigo}|">Editar</a>&nbsp;&nbsp;
+					<a class="btn btn-danger" th:href="|/menu/eventos/remover?codigo=${evento.codigo}|">Remover</a>
+				</td>
+		    </tr>
+		  </tbody>
+		</table>
 	</div>
-	<hr>
-	<table class="table">
-	  <thead class="thead-light">
-	    <tr>
-	      <th scope="col">Nome do Evento</th>
-	      <th scope="col">Data</th>
-	      <th scope="col">Nome do Responsável</th>
-	      <th scope="col">Telefone do Responsável</th>
-	      <th scope="col">Duração</th>
-	      <th scope="col">Ações</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr th:each="evento : ${listaEventos}">
-	      	<td th:text="${evento.nomeEvento}"></td>
-			<td th:text="${evento.dataRealizacao}"></td>
-			<td th:text="${evento.nomeResponsavel}"></td>
-			<td th:text="${evento.telefoneResponsavel}"></td>
-			<td th:text="${evento.duracaoEmHoras}"></td>
-			<td>
-				<a class="btn btn-warning" th:href="@{/menu/eventos/editar(id=${evento.codigo})}">Editar</a>&nbsp;&nbsp;
-				<a class="btn btn-danger" th:href="@{/menu/eventos/remover(id=${evento.codigo})}">Remover</a>
-			</td>
-	    </tr>
-	  </tbody>
-	</table>
-	<hr>
 </div>
 </body>
 </html>

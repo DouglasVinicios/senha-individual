@@ -10,8 +10,8 @@
 <div class="container">
 	<br>
 	<h2>Locais</h2>
-	<a th:href="@{/menu}">Voltar ao menu</a>&nbsp;&nbsp;
-	<a th:href="@{/menu/local-eventos/cadastrar}">Cadastrar novo local</a>
+	<a class="btn btn-outline-secondary" th:href="@{/menu}">Voltar ao menu</a>&nbsp;&nbsp;
+	<a class="btn btn-outline-info" th:href="@{/menu/local-eventos/cadastrar}">Novo Local</a>
 	<hr>
 	<table class="table">
 		<thead class="thead-light">
@@ -28,8 +28,8 @@
 				<td th:text="${localEvento.capacidade}"></td>
 				<td><a th:href="${localEvento.linkGoogleMaps}" th:text="${localEvento.linkGoogleMaps}" target="_blank"></a></td>
 				<td>
-					<a class="btn btn-warning" th:href="@{/menu/local-eventos/editar(id=${localEvento.codigo})}">Editar</a>
-					<a class="btn btn-danger" th:href="@{/menu/local-eventos/remover(id=${localEvento.codigo})}">Remover</a>
+					<a class="btn btn-warning" th:href="|/menu/local-eventos/editar?codigo=${localEvento.codigo}|">Editar</a>
+					<a class="btn btn-danger" th:href="|/menu/local-eventos/remover?codigo=${localEvento.codigo}|">Remover</a>
 				</td>
 			</tr>
 		</tbody>
