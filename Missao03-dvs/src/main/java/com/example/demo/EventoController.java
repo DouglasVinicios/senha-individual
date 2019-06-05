@@ -23,7 +23,6 @@ public class EventoController {
 	@GetMapping("")
 	public ModelAndView exibirEventos() {
 		ModelAndView mv = new ModelAndView("/eventos/lista-eventos");
-		mv.addObject("evento", new Evento());
 		mv.addObject("listaEventos", this.eventoRep.findAll(Sort.by("nomeEvento")));
 		return mv;
 	}
@@ -31,7 +30,6 @@ public class EventoController {
 	@PostMapping("")
 	public ModelAndView pesquisarEvento(@RequestParam(required = false) String nomePesquisado) {
 		ModelAndView mv = new ModelAndView("/eventos/lista-eventos");
-		mv.addObject("evento", new Evento());
 		if(nomePesquisado == null || nomePesquisado.trim().isEmpty()) {
 			mv.addObject("listaEventos", this.eventoRep.findAll(Sort.by("nomeEvento")));
 		}else {
