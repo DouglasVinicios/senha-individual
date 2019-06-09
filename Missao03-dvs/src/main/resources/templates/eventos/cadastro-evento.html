@@ -93,7 +93,7 @@
 		<div class="form-group row">
 			<label for="telefone do responsavel" class="col-sm-2 col-form-label">Telefone do Responsável</label>
 			<div class="col-sm-6">
-				<input class="form-control" type="text" th:field="*{telefoneResponsavel}">
+				<input class="form-control" type="text" th:field="*{telefoneResponsavel}" placeholder="xxxx-xxxx">
 			</div>
 		</div>
 		<div class="row" th:if="${#fields.hasErrors('duracaoEmHoras')}">
