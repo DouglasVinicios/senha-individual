@@ -28,7 +28,7 @@ public class Evento {
 	private int qtdMaximaConvidados;
 	@NotBlank(message = "Nome é necessário")
 	private String nomeResponsavel;
-	@Pattern(regexp = "^[0-9]{9}", message = "Número de telefone inválido")
+	@Pattern(regexp = "^[0-9]{4}-[0-9]{4}", message = "Número de telefone inválido, padrão aceito 1234-5678")
 	private String telefoneResponsavel;
 	@Min(value = 1, message = "Deve ser maior que 0")
 	private int duracaoEmHoras;
